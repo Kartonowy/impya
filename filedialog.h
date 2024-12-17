@@ -7,7 +7,7 @@ class FileDialog
 {
 public:
     FileDialog();
-    static void open(QWidget*);
+    static QString open(QWidget*);
 };
 
 #endif // FILEDIALOG_H

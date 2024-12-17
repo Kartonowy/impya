@@ -7,6 +7,7 @@
 #include "filedialog.h"
 #include "QRandomGenerator"
 #include "anymap.h"
+#include "ppm.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -46,7 +47,16 @@ MainWindow::~MainWindow()
 void MainWindow::createMenus() {
     QAction *openact = new QAction(tr("Open file"));
     openact->setShortcut(QKeySequence::New);
-    connect(openact, &QAction::triggered, this, [=](){FileDialog::open(this);});
+    connect(openact, &QAction::triggered, this, [=](){
+        PPM* ppm = new PPM();
+        QString filename = FileDialog::open(this);
+        qDebug() << filename;
+        QImage canvas = ppm->read(filename);
+        QLabel* parent = this->findChild<QLabel*>();
+        parent->setPixmap(QPixmap::fromImage(canvas));
+        parent->show();
+
+    });
 
 
     QAction *saveact = new QAction(tr("Save to file"));
@@ -60,7 +70,7 @@ void MainWindow::createMenus() {
 }
 
 void MainWindow::createCanvas() {
-    QImage canvas = Anymap::P3(this->width(), this->height());
+    QImage canvas = PPM::read("C:/users/somewhere/Documents/impya/examples/miku.ppm");
     QLabel* label = new QLabel(this);
     label->setPixmap(QPixmap::fromImage(canvas));
     label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

@@ -12,12 +12,14 @@ SOURCES += \
     anymap.cpp \
     filedialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    ppm.cpp
 
 HEADERS += \
     anymap.h \
     filedialog.h \
-    mainwindow.h
+    mainwindow.h \
+    ppm.h
 
 FORMS += \
     mainwindow.ui

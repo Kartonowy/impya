@@ -22,69 +22,69 @@ Anymap::Anymap(QFile file) {
     }
 }
 
-QImage Anymap::P1(int winWidth, int winHeight) {
-    QString Simage = "P1\n# komentarz\n6 10\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n1 0 0 0 1 0\n0 1 1 1 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0";
-    QList<QString> lines = Simage.split("\n");
-    lines.pop_front(); // pop format, dont care for now
-    lines.pop_front(); // pop comment, also dont care
-    QList<QString> Ssize = lines.takeFirst().split(" ");
-    int width = Ssize[0].toInt();
-    int height = Ssize[1].toInt();
+// QImage Anymap::P1(int winWidth, int winHeight) {
+//     QString Simage = "P1\n# komentarz\n6 10\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n0 0 0 0 1 0\n1 0 0 0 1 0\n0 1 1 1 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0";
+//     QList<QString> lines = Simage.split("\n");
+//     lines.pop_front(); // pop format, dont care for now
+//     lines.pop_front(); // pop comment, also dont care
+//     QList<QString> Ssize = lines.takeFirst().split(" ");
+//     int width = Ssize[0].toInt();
+//     int height = Ssize[1].toInt();
 
-    qDebug() << "width: " << width << "height: " << height;
+//     qDebug() << "width: " << width << "height: " << height;
 
-    std::string Sdata = lines.join(" ").split(" ").join("").toStdString();
-    qDebug() << Sdata;
+//     std::string Sdata = lines.join(" ").split(" ").join("").toStdString();
+//     qDebug() << Sdata;
 
-// #include "QRandomGenerator"
-//    QRandomGenerator gen(time(NULL));
-    uchar* data = (uchar*)Sdata.c_str();
-    for (int i = 0; i < width * height; ++i) {
-        data[i] = data[i] - 48;
-        if (data[i] == 1) {
-            data[i] = 255;
-        }
-        //data[i] = gen.bounded(255);
-        qDebug() << data[i];
-    }
+// // #include "QRandomGenerator"
+// //    QRandomGenerator gen(time(NULL));
+//     uchar* data = (uchar*)Sdata.c_str();
+//     for (int i = 0; i < width * height; ++i) {
+//         data[i] = data[i] - 48;
+//         if (data[i] == 1) {
+//             data[i] = 255;
+//         }
+//         //data[i] = gen.bounded(255);
+//         qDebug() << data[i];
+//     }
 
 
-    // QImage* canvas = new QImage(data, width, height, QImage::Format_Mono);
-    QImage canvas = (new QImage(data, width , height , width,  QImage::Format_Grayscale8))
-                        ->scaled(winWidth, winHeight, Qt::KeepAspectRatio);
-    return canvas;
-}
+//     // QImage* canvas = new QImage(data, width, height, QImage::Format_Mono);
+//     QImage canvas = (new QImage(data, width , height , width,  QImage::Format_Grayscale8))
+//                         ->scaled(winWidth, winHeight, Qt::KeepAspectRatio);
+//     return canvas;
+// }
 
-QImage Anymap::P2(int winWidth, int winHeight) {
-    QString Simage = "P2\n# Shows the word FEEP\n24 7\n15\n0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0\n0  3  3  3  3  0  0  7  7  7  7  0  0 11 11 11 11  0  0 15 15 15 15  0\n0  3  0  0  0  0  0  7  0  0  0  0  0 11  0  0  0  0  0 15  0  0 15  0\n0  3  3  3  0  0  0  7  7  7  0  0  0 11 11 11  0  0  0 15 15 15 15  0\n0  3  0  0  0  0  0  7  0  0  0  0  0 11  0  0  0  0  0 15  0  0  0  0\n0  3  0  0  0  0  0  7  7  7  7  0  0 11 11 11 11  0  0 15  0  0  0  0\n0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0";
-    QList<QString> lines = Simage.split("\n");
-    lines.pop_front(); // pop format, dont care for now
-    lines.pop_front(); // pop comment, also dont care
-    QList<QString> Ssize = lines.takeFirst().split(" ");
-    const int width = Ssize[0].toInt();
-    const int height = Ssize[1].toInt();
-    int max = lines.takeFirst().toInt();
+// QImage Anymap::P2(int winWidth, int winHeight) {
+//     QString Simage = "P2\n# Shows the word FEEP\n24 7\n15\n0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0\n0  3  3  3  3  0  0  7  7  7  7  0  0 11 11 11 11  0  0 15 15 15 15  0\n0  3  0  0  0  0  0  7  0  0  0  0  0 11  0  0  0  0  0 15  0  0 15  0\n0  3  3  3  0  0  0  7  7  7  0  0  0 11 11 11  0  0  0 15 15 15 15  0\n0  3  0  0  0  0  0  7  0  0  0  0  0 11  0  0  0  0  0 15  0  0  0  0\n0  3  0  0  0  0  0  7  7  7  7  0  0 11 11 11 11  0  0 15  0  0  0  0\n0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0";
+//     QList<QString> lines = Simage.split("\n");
+//     lines.pop_front(); // pop format, dont care for now
+//     lines.pop_front(); // pop comment, also dont care
+//     QList<QString> Ssize = lines.takeFirst().split(" ");
+//     const int width = Ssize[0].toInt();
+//     const int height = Ssize[1].toInt();
+//     int max = lines.takeFirst().toInt();
 
-    uchar* twoja = new uchar[height * width];
-    int index = 0;
-    for (int i = 0; i < height; ++i) {
-        QStringList splitted = lines[i].split(" ");
-        splitted.removeAll(QString(""));
-        for (int j = 0; j < width; ++j) {
-            twoja[index] = splitted[j].toInt();
-            index++;
-        }
-    }
+//     uchar* twoja = new uchar[height * width];
+//     int index = 0;
+//     for (int i = 0; i < height; ++i) {
+//         QStringList splitted = lines[i].split(" ");
+//         splitted.removeAll(QString(""));
+//         for (int j = 0; j < width; ++j) {
+//             twoja[index] = splitted[j].toInt();
+//             index++;
+//         }
+//     }
 
-    for (int i = 0; i < width * height; ++i) {
-        twoja[i] = (twoja[i] * 255 / max);
-    }
+//     for (int i = 0; i < width * height; ++i) {
+//         twoja[i] = (twoja[i] * 255 / max);
+//     }
 
-    // QImage* canvas = new QImage(data, width, height, QImage::Format_Mono);
-    QImage canvas = (new QImage(twoja, width , height , width,  QImage::Format_Grayscale8))
-                        ->scaled(winWidth, winHeight, Qt::KeepAspectRatio);
-    return canvas;
-}
+//     // QImage* canvas = new QImage(data, width, height, QImage::Format_Mono);
+//     QImage canvas = (new QImage(twoja, width , height , width,  QImage::Format_Grayscale8))
+//                         ->scaled(winWidth, winHeight, Qt::KeepAspectRatio);
+//     return canvas;
+// }
 
 
 QImage Anymap::P3(int winWidth, int winHeight) {
@@ -118,7 +118,7 @@ QImage Anymap::P3(int winWidth, int winHeight) {
     //    twoja[i] = (twoja[i] * 255 / max);
     //}
 
-    qDebug() << new QImage(twoja, width, height, width,  QImage::Format_RGB32);
+    qDebug() << new QImage(twoja, width, height, width * 4,  QImage::Format_RGB32);
 
     // QImage* canvas = new QImage(data, width, height, QImage::Format_Mono);
     QImage canvas = (new QImage(twoja, width, height, width * 4,  QImage::Format_ARGB32))
